@@ -8,7 +8,6 @@
 
 #include <hpx/hpx_init.hpp>
 
-#include <chrono>
 #include <random>
 #include <iostream>
 #include <numeric>
@@ -17,7 +16,7 @@
 
 int hpx_main(boost::program_options::variables_map& vm)
 {
-    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    auto seed = std::random_device{}();
     if (vm.count("seed"))
         seed = vm["seed"].as<unsigned int>();
 
