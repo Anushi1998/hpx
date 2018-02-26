@@ -21,13 +21,14 @@ int hpx_main(boost::program_options::variables_map& vm)
         seed = vm["seed"].as<unsigned int>();
 
     std::cout << "using seed: " << seed << std::endl;
-    std::mt19937 _rand(seed);
+    std::mt19937 gen(seed);
+    std::uniform_int_distribution<> dis(2, 101);
 
     // create data vector on host
     int const N = 100;
     std::vector<int> h_A(N);
     std::vector<int> h_B(N);
-    std::iota(h_A.begin(), h_A.end(), (_rand() % 100) + 2);
+    std::iota(h_A.begin(), h_A.end(), dis(gen));
 
     hpx::compute::cuda::target target;
 
