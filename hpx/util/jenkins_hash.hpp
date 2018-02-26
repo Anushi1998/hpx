@@ -98,8 +98,11 @@ namespace hpx { namespace util
         /// constructors and destructor
         jenkins_hash() : seed_(0) {}
 
+        std::mt19937 gen(std::random_device{}());
+        std::uniform_int_distribution<> dis(0, size);
+
         explicit jenkins_hash(size_type size)
-            : seed_(std::rand() % size)
+            : seed_(dis(gen))
         {}
 
         explicit jenkins_hash(size_type seedval, seedenum)
