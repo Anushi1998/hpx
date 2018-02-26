@@ -791,9 +791,10 @@ void big_boot_barrier::wait_hosted(
         , unassigned
         , suggested_prefix);
 
-    std::srand(static_cast<unsigned>(util::high_resolution_clock::now()));
+    std::mt19937 gen(std::random_device{}());
+
     apply(
-          static_cast<std::uint32_t>(std::rand()) // random first parcel id
+          static_cast<std::uint32_t>(gen()) // random first parcel id
         , 0
         , bootstrap_agas
         , register_worker_action()
