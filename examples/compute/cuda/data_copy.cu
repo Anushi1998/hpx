@@ -8,6 +8,8 @@
 
 #include <hpx/hpx_init.hpp>
 
+#include <chrono>
+#include <random>
 #include <iostream>
 #include <numeric>
 #include <string>
@@ -15,18 +17,18 @@
 
 int hpx_main(boost::program_options::variables_map& vm)
 {
-    unsigned int seed = (unsigned int)std::time(nullptr);
+    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
     if (vm.count("seed"))
         seed = vm["seed"].as<unsigned int>();
 
     std::cout << "using seed: " << seed << std::endl;
-    std::srand(seed);
+    std::mt19937 _rand(seed);
 
     // create data vector on host
     int const N = 100;
     std::vector<int> h_A(N);
     std::vector<int> h_B(N);
-    std::iota(h_A.begin(), h_A.end(), (std::rand() % 100) + 2);
+    std::iota(h_A.begin(), h_A.end(), (_rand() % 100) + 2);
 
     hpx::compute::cuda::target target;
 
