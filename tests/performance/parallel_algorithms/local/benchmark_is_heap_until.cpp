@@ -25,10 +25,13 @@
 #include <vector>
 
 ///////////////////////////////////////////////////////////////////////////////
+
+std::mt19937 _rand(std::random_device{}());
+
 struct random_fill
 {
     random_fill()
-        : gen(std::rand()),
+        : gen(_rand()),
         dist(0, RAND_MAX)
     {}
 
@@ -222,3 +225,4 @@ int main(int argc, char* argv[])
 
     return hpx::util::report_errors();
 }
+
