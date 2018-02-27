@@ -57,7 +57,7 @@ void test_bulk_sync()
     typedef hpx::compute::cuda::default_executor executor;
 
     std::vector<int> v(107);
-    std::iota(boost::begin(v), boost::end(v), std::rand());
+    std::iota(boost::begin(v), boost::end(v), std::random_device{}());
 
     using hpx::util::placeholders::_1;
     using hpx::util::placeholders::_2;
@@ -73,7 +73,7 @@ void test_bulk_async()
     typedef hpx::compute::cuda::default_executor executor;
 
     std::vector<int> v(107);
-    std::iota(boost::begin(v), boost::end(v), std::rand());
+    std::iota(boost::begin(v), boost::end(v), std::random_device{}());
 
     using hpx::util::placeholders::_1;
     using hpx::util::placeholders::_2;
