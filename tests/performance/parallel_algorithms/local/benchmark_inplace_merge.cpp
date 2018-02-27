@@ -28,10 +28,13 @@
 #include "utils.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////
+
+std::mt19937 _rand(std::random_device{}());
+
 struct random_fill
 {
     random_fill(std::size_t random_range)
-        : gen(std::rand()),
+        : gen(_rand()),
         dist(0, random_range - 1)
     {}
 
