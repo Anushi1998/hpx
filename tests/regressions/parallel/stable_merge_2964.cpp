@@ -24,7 +24,7 @@ struct random_fill
 {
     random_fill() = default;
     random_fill(int rand_base, int range)
-      : gen(std::rand()),
+      : gen(std::random_device{}()),
         dist(rand_base - range / 2, rand_base + range / 2)
     {}
 
@@ -185,7 +185,7 @@ int hpx_main(int argc, char **argv)
     HPX_TEST(equality);
 
     // Do moduler operation for avoiding overflow in ramdom_fill. (#2954)
-    int rand_base = std::rand() % 10000;
+    int rand_base = std::random_device{}() % 10000;
 
     using namespace hpx::parallel;
 
