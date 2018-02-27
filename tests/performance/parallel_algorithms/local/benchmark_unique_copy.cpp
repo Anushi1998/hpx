@@ -29,7 +29,7 @@
 struct random_fill
 {
     random_fill(std::size_t random_range)
-        : gen(std::rand()),
+        : gen(std::random_device{}()),
         dist(0, random_range - 1)
     {}
 
