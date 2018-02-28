@@ -16,6 +16,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <random>
 #include <string>
 #include <utility>
 
@@ -98,11 +99,10 @@ namespace hpx { namespace util
         /// constructors and destructor
         jenkins_hash() : seed_(0) {}
 
-        std::mt19937 gen(std::random_device{}());
-        std::uniform_int_distribution<> dis(0, size);
+        std::mt19937 gen{(unsigned int)std::random_device{}()};
 
         explicit jenkins_hash(size_type size)
-            : seed_(dis(gen))
+            : seed_(std::uniform_int_distribution<>(0, size-1)(gen))
         {}
 
         explicit jenkins_hash(size_type seedval, seedenum)

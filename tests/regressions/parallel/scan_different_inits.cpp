@@ -230,7 +230,7 @@ int hpx_main(boost::program_options::variables_map& vm)
     std::mt19937 gen(seed);
     std::uniform_int_distribution<> dis(0, 99);
 
-    auto get_next_num = [](int& num){ num = dis(gen); };
+    auto get_next_num = [&dis, &gen](int& num){ num = dis(gen); };
 
     std::vector<int> a1(8); std::for_each(a1.begin(), a1.end(), get_next_num);
     test_one(a1);

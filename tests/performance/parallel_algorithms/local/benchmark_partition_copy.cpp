@@ -109,7 +109,7 @@ void run_benchmark(std::size_t vector_size, int test_count, IteratorTag)
 
     std::cout << "* Running Benchmark..." << std::endl;
 
-    int rand_base = gen();
+    int rand_base = std::random_device{}();
 
     auto pred = [rand_base](int t) {
         return t < rand_base;

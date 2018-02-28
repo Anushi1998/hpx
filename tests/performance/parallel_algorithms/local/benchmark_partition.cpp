@@ -185,7 +185,7 @@ int hpx_main(boost::program_options::variables_map& vm)
         seed = vm["seed"].as<std::uint32_t>();
 
     std::mt19937 gen(static_cast<unsigned int>(seed));
-    uniform_int_distribution<> dis(0,random_fill_range-1);
+    std::uniform_int_distribution<> dis(0,random_fill_range-1);
 
     // pull values from cmd
     std::size_t vector_size = vm["vector_size"].as<std::size_t>();
